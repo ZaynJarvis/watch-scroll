@@ -1,0 +1,970 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2BF494FE2E4926FA00673CFD /* scroll-watch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 2BF494DB2E4926F900673CFD /* scroll-watch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2BF494BB2E4926A300673CFD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2BF494A22E4926A100673CFD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2BF494A92E4926A100673CFD;
+			remoteInfo = scroll;
+		};
+		2BF494C52E4926A300673CFD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2BF494A22E4926A100673CFD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2BF494A92E4926A100673CFD;
+			remoteInfo = scroll;
+		};
+		2BF494EB2E4926FA00673CFD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2BF494A22E4926A100673CFD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2BF494DA2E4926F900673CFD;
+			remoteInfo = "scroll-watch Watch App";
+		};
+		2BF494F52E4926FA00673CFD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2BF494A22E4926A100673CFD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2BF494DA2E4926F900673CFD;
+			remoteInfo = "scroll-watch Watch App";
+		};
+		2BF494FC2E4926FA00673CFD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2BF494A22E4926A100673CFD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2BF494DA2E4926F900673CFD;
+			remoteInfo = "scroll-watch Watch App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		2BF495022E4926FA00673CFD /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				2BF494FE2E4926FA00673CFD /* scroll-watch Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		2BF494AA2E4926A100673CFD /* scroll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = scroll.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BF494BA2E4926A300673CFD /* scrollTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = scrollTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BF494C42E4926A300673CFD /* scrollUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = scrollUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BF494DB2E4926F900673CFD /* scroll-watch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "scroll-watch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BF494EA2E4926FA00673CFD /* scroll-watch Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "scroll-watch Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BF494F42E4926FA00673CFD /* scroll-watch Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "scroll-watch Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		2BD64E182E4A4D520090FE59 /* Exceptions for "scroll" folder in "scroll" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 2BF494A92E4926A100673CFD /* scroll */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		2BF494AC2E4926A100673CFD /* scroll */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				2BD64E182E4A4D520090FE59 /* Exceptions for "scroll" folder in "scroll" target */,
+			);
+			path = scroll;
+			sourceTree = "<group>";
+		};
+		2BF494BD2E4926A300673CFD /* scrollTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = scrollTests;
+			sourceTree = "<group>";
+		};
+		2BF494C72E4926A300673CFD /* scrollUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = scrollUITests;
+			sourceTree = "<group>";
+		};
+		2BF494DC2E4926F900673CFD /* scroll-watch Watch App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "scroll-watch Watch App";
+			sourceTree = "<group>";
+		};
+		2BF494ED2E4926FA00673CFD /* scroll-watch Watch AppTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "scroll-watch Watch AppTests";
+			sourceTree = "<group>";
+		};
+		2BF494F72E4926FA00673CFD /* scroll-watch Watch AppUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "scroll-watch Watch AppUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2BF494A72E4926A100673CFD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2BF494B72E4926A300673CFD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2BF494C12E4926A300673CFD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2BF494D82E4926F900673CFD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2BF494E72E4926FA00673CFD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2BF494F12E4926FA00673CFD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2BF494A12E4926A100673CFD = {
+			isa = PBXGroup;
+			children = (
+				2BF494AC2E4926A100673CFD /* scroll */,
+				2BF494BD2E4926A300673CFD /* scrollTests */,
+				2BF494C72E4926A300673CFD /* scrollUITests */,
+				2BF494DC2E4926F900673CFD /* scroll-watch Watch App */,
+				2BF494ED2E4926FA00673CFD /* scroll-watch Watch AppTests */,
+				2BF494F72E4926FA00673CFD /* scroll-watch Watch AppUITests */,
+				2BF494AB2E4926A100673CFD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2BF494AB2E4926A100673CFD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2BF494AA2E4926A100673CFD /* scroll.app */,
+				2BF494BA2E4926A300673CFD /* scrollTests.xctest */,
+				2BF494C42E4926A300673CFD /* scrollUITests.xctest */,
+				2BF494DB2E4926F900673CFD /* scroll-watch Watch App.app */,
+				2BF494EA2E4926FA00673CFD /* scroll-watch Watch AppTests.xctest */,
+				2BF494F42E4926FA00673CFD /* scroll-watch Watch AppUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2BF494A92E4926A100673CFD /* scroll */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2BF494CE2E4926A300673CFD /* Build configuration list for PBXNativeTarget "scroll" */;
+			buildPhases = (
+				2BF494A62E4926A100673CFD /* Sources */,
+				2BF494A72E4926A100673CFD /* Frameworks */,
+				2BF494A82E4926A100673CFD /* Resources */,
+				2BF495022E4926FA00673CFD /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2BF494FD2E4926FA00673CFD /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				2BF494AC2E4926A100673CFD /* scroll */,
+			);
+			name = scroll;
+			packageProductDependencies = (
+			);
+			productName = scroll;
+			productReference = 2BF494AA2E4926A100673CFD /* scroll.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2BF494B92E4926A300673CFD /* scrollTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2BF494D12E4926A300673CFD /* Build configuration list for PBXNativeTarget "scrollTests" */;
+			buildPhases = (
+				2BF494B62E4926A300673CFD /* Sources */,
+				2BF494B72E4926A300673CFD /* Frameworks */,
+				2BF494B82E4926A300673CFD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2BF494BC2E4926A300673CFD /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				2BF494BD2E4926A300673CFD /* scrollTests */,
+			);
+			name = scrollTests;
+			packageProductDependencies = (
+			);
+			productName = scrollTests;
+			productReference = 2BF494BA2E4926A300673CFD /* scrollTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2BF494C32E4926A300673CFD /* scrollUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2BF494D42E4926A300673CFD /* Build configuration list for PBXNativeTarget "scrollUITests" */;
+			buildPhases = (
+				2BF494C02E4926A300673CFD /* Sources */,
+				2BF494C12E4926A300673CFD /* Frameworks */,
+				2BF494C22E4926A300673CFD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2BF494C62E4926A300673CFD /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				2BF494C72E4926A300673CFD /* scrollUITests */,
+			);
+			name = scrollUITests;
+			packageProductDependencies = (
+			);
+			productName = scrollUITests;
+			productReference = 2BF494C42E4926A300673CFD /* scrollUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		2BF494DA2E4926F900673CFD /* scroll-watch Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2BF494FF2E4926FA00673CFD /* Build configuration list for PBXNativeTarget "scroll-watch Watch App" */;
+			buildPhases = (
+				2BF494D72E4926F900673CFD /* Sources */,
+				2BF494D82E4926F900673CFD /* Frameworks */,
+				2BF494D92E4926F900673CFD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				2BF494DC2E4926F900673CFD /* scroll-watch Watch App */,
+			);
+			name = "scroll-watch Watch App";
+			packageProductDependencies = (
+			);
+			productName = "scroll-watch Watch App";
+			productReference = 2BF494DB2E4926F900673CFD /* scroll-watch Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2BF494E92E4926FA00673CFD /* scroll-watch Watch AppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2BF495032E4926FA00673CFD /* Build configuration list for PBXNativeTarget "scroll-watch Watch AppTests" */;
+			buildPhases = (
+				2BF494E62E4926FA00673CFD /* Sources */,
+				2BF494E72E4926FA00673CFD /* Frameworks */,
+				2BF494E82E4926FA00673CFD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2BF494EC2E4926FA00673CFD /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				2BF494ED2E4926FA00673CFD /* scroll-watch Watch AppTests */,
+			);
+			name = "scroll-watch Watch AppTests";
+			packageProductDependencies = (
+			);
+			productName = "scroll-watch Watch AppTests";
+			productReference = 2BF494EA2E4926FA00673CFD /* scroll-watch Watch AppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2BF494F32E4926FA00673CFD /* scroll-watch Watch AppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2BF495062E4926FA00673CFD /* Build configuration list for PBXNativeTarget "scroll-watch Watch AppUITests" */;
+			buildPhases = (
+				2BF494F02E4926FA00673CFD /* Sources */,
+				2BF494F12E4926FA00673CFD /* Frameworks */,
+				2BF494F22E4926FA00673CFD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2BF494F62E4926FA00673CFD /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				2BF494F72E4926FA00673CFD /* scroll-watch Watch AppUITests */,
+			);
+			name = "scroll-watch Watch AppUITests";
+			packageProductDependencies = (
+			);
+			productName = "scroll-watch Watch AppUITests";
+			productReference = 2BF494F42E4926FA00673CFD /* scroll-watch Watch AppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2BF494A22E4926A100673CFD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					2BF494A92E4926A100673CFD = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					2BF494B92E4926A300673CFD = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 2BF494A92E4926A100673CFD;
+					};
+					2BF494C32E4926A300673CFD = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 2BF494A92E4926A100673CFD;
+					};
+					2BF494DA2E4926F900673CFD = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					2BF494E92E4926FA00673CFD = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 2BF494DA2E4926F900673CFD;
+					};
+					2BF494F32E4926FA00673CFD = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 2BF494DA2E4926F900673CFD;
+					};
+				};
+			};
+			buildConfigurationList = 2BF494A52E4926A100673CFD /* Build configuration list for PBXProject "scroll" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2BF494A12E4926A100673CFD;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 2BF494AB2E4926A100673CFD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2BF494A92E4926A100673CFD /* scroll */,
+				2BF494B92E4926A300673CFD /* scrollTests */,
+				2BF494C32E4926A300673CFD /* scrollUITests */,
+				2BF494DA2E4926F900673CFD /* scroll-watch Watch App */,
+				2BF494E92E4926FA00673CFD /* scroll-watch Watch AppTests */,
+				2BF494F32E4926FA00673CFD /* scroll-watch Watch AppUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2BF494A82E4926A100673CFD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2BF494B82E4926A300673CFD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2BF494C22E4926A300673CFD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2BF494D92E4926F900673CFD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2BF494E82E4926FA00673CFD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2BF494F22E4926FA00673CFD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2BF494A62E4926A100673CFD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2BF494B62E4926A300673CFD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2BF494C02E4926A300673CFD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2BF494D72E4926F900673CFD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2BF494E62E4926FA00673CFD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2BF494F02E4926FA00673CFD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2BF494BC2E4926A300673CFD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2BF494A92E4926A100673CFD /* scroll */;
+			targetProxy = 2BF494BB2E4926A300673CFD /* PBXContainerItemProxy */;
+		};
+		2BF494C62E4926A300673CFD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2BF494A92E4926A100673CFD /* scroll */;
+			targetProxy = 2BF494C52E4926A300673CFD /* PBXContainerItemProxy */;
+		};
+		2BF494EC2E4926FA00673CFD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2BF494DA2E4926F900673CFD /* scroll-watch Watch App */;
+			targetProxy = 2BF494EB2E4926FA00673CFD /* PBXContainerItemProxy */;
+		};
+		2BF494F62E4926FA00673CFD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2BF494DA2E4926F900673CFD /* scroll-watch Watch App */;
+			targetProxy = 2BF494F52E4926FA00673CFD /* PBXContainerItemProxy */;
+		};
+		2BF494FD2E4926FA00673CFD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2BF494DA2E4926F900673CFD /* scroll-watch Watch App */;
+			targetProxy = 2BF494FC2E4926FA00673CFD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		2BF494CC2E4926A300673CFD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2BF494CD2E4926A300673CFD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2BF494CF2E4926A300673CFD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"scroll/Preview Content\"";
+				DEVELOPMENT_TEAM = TN9AV8C8KB;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = scroll/Info.plist;
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "WatchScroller需要访问本地网络来自动发现并连接到Mac上的服务器";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zaynjarvis.scroll;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2BF494D02E4926A300673CFD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"scroll/Preview Content\"";
+				DEVELOPMENT_TEAM = TN9AV8C8KB;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = scroll/Info.plist;
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "WatchScroller需要访问本地网络来自动发现并连接到Mac上的服务器";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zaynjarvis.scroll;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		2BF494D22E4926A300673CFD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TN9AV8C8KB;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zaynjarvis.scrollTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/scroll.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/scroll";
+			};
+			name = Debug;
+		};
+		2BF494D32E4926A300673CFD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TN9AV8C8KB;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zaynjarvis.scrollTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/scroll.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/scroll";
+			};
+			name = Release;
+		};
+		2BF494D52E4926A300673CFD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TN9AV8C8KB;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zaynjarvis.scrollUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = scroll;
+			};
+			name = Debug;
+		};
+		2BF494D62E4926A300673CFD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TN9AV8C8KB;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zaynjarvis.scrollUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = scroll;
+			};
+			name = Release;
+		};
+		2BF495002E4926FA00673CFD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"scroll-watch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = TN9AV8C8KB;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "scroll-watch";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.zaynjarvis.scroll;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zaynjarvis.scroll.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Debug;
+		};
+		2BF495012E4926FA00673CFD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"scroll-watch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = TN9AV8C8KB;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "scroll-watch";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.zaynjarvis.scroll;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zaynjarvis.scroll.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Release;
+		};
+		2BF495042E4926FA00673CFD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TN9AV8C8KB;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zaynjarvis.scroll-watch-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/scroll-watch Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/scroll-watch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Debug;
+		};
+		2BF495052E4926FA00673CFD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TN9AV8C8KB;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zaynjarvis.scroll-watch-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/scroll-watch Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/scroll-watch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Release;
+		};
+		2BF495072E4926FA00673CFD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TN9AV8C8KB;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zaynjarvis.scroll-watch-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "scroll-watch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Debug;
+		};
+		2BF495082E4926FA00673CFD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TN9AV8C8KB;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zaynjarvis.scroll-watch-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "scroll-watch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2BF494A52E4926A100673CFD /* Build configuration list for PBXProject "scroll" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2BF494CC2E4926A300673CFD /* Debug */,
+				2BF494CD2E4926A300673CFD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2BF494CE2E4926A300673CFD /* Build configuration list for PBXNativeTarget "scroll" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2BF494CF2E4926A300673CFD /* Debug */,
+				2BF494D02E4926A300673CFD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2BF494D12E4926A300673CFD /* Build configuration list for PBXNativeTarget "scrollTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2BF494D22E4926A300673CFD /* Debug */,
+				2BF494D32E4926A300673CFD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2BF494D42E4926A300673CFD /* Build configuration list for PBXNativeTarget "scrollUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2BF494D52E4926A300673CFD /* Debug */,
+				2BF494D62E4926A300673CFD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2BF494FF2E4926FA00673CFD /* Build configuration list for PBXNativeTarget "scroll-watch Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2BF495002E4926FA00673CFD /* Debug */,
+				2BF495012E4926FA00673CFD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2BF495032E4926FA00673CFD /* Build configuration list for PBXNativeTarget "scroll-watch Watch AppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2BF495042E4926FA00673CFD /* Debug */,
+				2BF495052E4926FA00673CFD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2BF495062E4926FA00673CFD /* Build configuration list for PBXNativeTarget "scroll-watch Watch AppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2BF495072E4926FA00673CFD /* Debug */,
+				2BF495082E4926FA00673CFD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2BF494A22E4926A100673CFD /* Project object */;
+}
