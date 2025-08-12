@@ -7,27 +7,32 @@ struct ContentView: View {
     @State private var crownAccumulator = 0.0
     @State private var lastSendTime = Date()
     @State private var sendTimer: Timer?
+    @State private var isScrolling = false
+    @State private var animationTimer: Timer?
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 15) {
-                // 连接状态
-                ConnectionStatusIndicator()
-                    .environmentObject(connectivityManager)
-                    .padding(.top, 10)
+            VStack(spacing: 20) {
+                if !connectivityManager.isConnected {
+                    ConnectionStatusIndicator()
+                        .environmentObject(connectivityManager)
+                }
                 
                 Spacer()
                 
-                // 主要功能提示
-                VStack(spacing: 10) {
-                    Image(systemName: "digitalcrown.horizontal.press")
-                        .font(.system(size: 40))
-                        .foregroundColor(.green)
-                    
-                    Text("转动表冠滚动")
-                        .font(.body)
-                        .foregroundColor(.primary)
-                }
+                // 极简主界面
+                Circle()
+                    .stroke(lineWidth: 4)
+                    .frame(width: 60, height: 60)
+                    .foregroundColor(connectivityManager.isConnected ? Color(red: 0.8, green: 0.6, blue: 0.2) : .gray)
+                    .opacity(isScrolling && connectivityManager.isConnected ? 0.4 : 1.0)
+                    .scaleEffect(isScrolling && connectivityManager.isConnected ? 1.1 : 1.0)
+                    .animation(
+                        isScrolling ? 
+                            .easeInOut(duration: 0.8).repeatForever(autoreverses: true) : 
+                            .easeOut(duration: 0.3), 
+                        value: isScrolling
+                    )
                 
                 Spacer()
             }
@@ -44,14 +49,24 @@ struct ContentView: View {
             .onChange(of: crownValue) { oldValue, newValue in
                 handleCrownRotation(newValue)
             }
-            .navigationTitle("Scroll")
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarHidden(true)
         }
     }
     
     
     private func handleCrownRotation(_ newValue: Double) {
         // Remove guard - always try to send, let WatchConnectivityManager handle the session check
+        
+        // 启动呼吸动画
+        if !isScrolling {
+            isScrolling = true
+        }
+        
+        // 重置停止动画的计时器
+        animationTimer?.invalidate()
+        animationTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
+            isScrolling = false
+        }
         
         // 计算滚动差值
         let delta = newValue - lastCrownValue
@@ -99,11 +114,11 @@ struct ConnectionStatusIndicator: View {
     
     var body: some View {
         HStack {
-            Image(systemName: connectivityManager.isConnected ? "checkmark.circle.fill" : "xmark.circle.fill")
-                .foregroundColor(connectivityManager.isConnected ? .green : .red)
+            Image(systemName: "exclamationmark.triangle.fill")
+                .foregroundColor(.orange)
                 .font(.caption)
             
-            Text(connectivityManager.isConnected ? "已连接" : "未连接")
+            Text("未连接")
                 .font(.caption2)
                 .foregroundColor(.secondary)
         }

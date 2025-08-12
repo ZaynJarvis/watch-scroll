@@ -7,10 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2BD64E6C2E4B126F0090FE59 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BD64E6B2E4B126F0090FE59 /* WidgetKit.framework */; };
+		2BD64E6E2E4B126F0090FE59 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BD64E6D2E4B126F0090FE59 /* SwiftUI.framework */; };
+		2BD64E772E4B12700090FE59 /* ScrollWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 2BD64E692E4B126F0090FE59 /* ScrollWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2BF494FE2E4926FA00673CFD /* scroll-watch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 2BF494DB2E4926F900673CFD /* scroll-watch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2BD64E752E4B12700090FE59 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2BF494A22E4926A100673CFD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2BD64E682E4B126F0090FE59;
+			remoteInfo = ScrollWidgetExtension;
+		};
 		2BF494BB2E4926A300673CFD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2BF494A22E4926A100673CFD /* Project object */;
@@ -49,6 +59,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		2BD64E782E4B12700090FE59 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				2BD64E772E4B12700090FE59 /* ScrollWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2BF495022E4926FA00673CFD /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -63,6 +84,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2BD64E692E4B126F0090FE59 /* ScrollWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ScrollWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BD64E6B2E4B126F0090FE59 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		2BD64E6D2E4B126F0090FE59 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		2BF494AA2E4926A100673CFD /* scroll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = scroll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BF494BA2E4926A300673CFD /* scrollTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = scrollTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BF494C42E4926A300673CFD /* scrollUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = scrollUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,9 +103,24 @@
 			);
 			target = 2BF494A92E4926A100673CFD /* scroll */;
 		};
+		2BD64E7C2E4B12700090FE59 /* Exceptions for "ScrollWidget" folder in "ScrollWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 2BD64E682E4B126F0090FE59 /* ScrollWidgetExtension */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		2BD64E6F2E4B126F0090FE59 /* ScrollWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				2BD64E7C2E4B12700090FE59 /* Exceptions for "ScrollWidget" folder in "ScrollWidgetExtension" target */,
+			);
+			path = ScrollWidget;
+			sourceTree = "<group>";
+		};
 		2BF494AC2E4926A100673CFD /* scroll */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -118,6 +157,15 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		2BD64E662E4B126F0090FE59 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2BD64E6E2E4B126F0090FE59 /* SwiftUI.framework in Frameworks */,
+				2BD64E6C2E4B126F0090FE59 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2BF494A72E4926A100673CFD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -163,6 +211,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2BD64E6A2E4B126F0090FE59 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2BD64E6B2E4B126F0090FE59 /* WidgetKit.framework */,
+				2BD64E6D2E4B126F0090FE59 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		2BF494A12E4926A100673CFD = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +229,8 @@
 				2BF494DC2E4926F900673CFD /* scroll-watch Watch App */,
 				2BF494ED2E4926FA00673CFD /* scroll-watch Watch AppTests */,
 				2BF494F72E4926FA00673CFD /* scroll-watch Watch AppUITests */,
+				2BD64E6F2E4B126F0090FE59 /* ScrollWidget */,
+				2BD64E6A2E4B126F0090FE59 /* Frameworks */,
 				2BF494AB2E4926A100673CFD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -185,6 +244,7 @@
 				2BF494DB2E4926F900673CFD /* scroll-watch Watch App.app */,
 				2BF494EA2E4926FA00673CFD /* scroll-watch Watch AppTests.xctest */,
 				2BF494F42E4926FA00673CFD /* scroll-watch Watch AppUITests.xctest */,
+				2BD64E692E4B126F0090FE59 /* ScrollWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -192,6 +252,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2BD64E682E4B126F0090FE59 /* ScrollWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2BD64E7B2E4B12700090FE59 /* Build configuration list for PBXNativeTarget "ScrollWidgetExtension" */;
+			buildPhases = (
+				2BD64E652E4B126F0090FE59 /* Sources */,
+				2BD64E662E4B126F0090FE59 /* Frameworks */,
+				2BD64E672E4B126F0090FE59 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				2BD64E6F2E4B126F0090FE59 /* ScrollWidget */,
+			);
+			name = ScrollWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = ScrollWidgetExtension;
+			productReference = 2BD64E692E4B126F0090FE59 /* ScrollWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		2BF494A92E4926A100673CFD /* scroll */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2BF494CE2E4926A300673CFD /* Build configuration list for PBXNativeTarget "scroll" */;
@@ -269,10 +351,12 @@
 				2BF494D72E4926F900673CFD /* Sources */,
 				2BF494D82E4926F900673CFD /* Frameworks */,
 				2BF494D92E4926F900673CFD /* Resources */,
+				2BD64E782E4B12700090FE59 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				2BD64E762E4B12700090FE59 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				2BF494DC2E4926F900673CFD /* scroll-watch Watch App */,
@@ -340,6 +424,9 @@
 				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
+					2BD64E682E4B126F0090FE59 = {
+						CreatedOnToolsVersion = 16.2;
+					};
 					2BF494A92E4926A100673CFD = {
 						CreatedOnToolsVersion = 16.2;
 					};
@@ -384,11 +471,19 @@
 				2BF494DA2E4926F900673CFD /* scroll-watch Watch App */,
 				2BF494E92E4926FA00673CFD /* scroll-watch Watch AppTests */,
 				2BF494F32E4926FA00673CFD /* scroll-watch Watch AppUITests */,
+				2BD64E682E4B126F0090FE59 /* ScrollWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		2BD64E672E4B126F0090FE59 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2BF494A82E4926A100673CFD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -434,6 +529,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2BD64E652E4B126F0090FE59 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2BF494A62E4926A100673CFD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -479,6 +581,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		2BD64E762E4B12700090FE59 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2BD64E682E4B126F0090FE59 /* ScrollWidgetExtension */;
+			targetProxy = 2BD64E752E4B12700090FE59 /* PBXContainerItemProxy */;
+		};
 		2BF494BC2E4926A300673CFD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 2BF494A92E4926A100673CFD /* scroll */;
@@ -507,6 +614,66 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		2BD64E792E4B12700090FE59 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TN9AV8C8KB;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ScrollWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ScrollWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zaynjarvis.scroll.watchkitapp.ScrollWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Debug;
+		};
+		2BD64E7A2E4B12700090FE59 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TN9AV8C8KB;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ScrollWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ScrollWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zaynjarvis.scroll.watchkitapp.ScrollWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Release;
+		};
 		2BF494CC2E4926A300673CFD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -901,6 +1068,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2BD64E7B2E4B12700090FE59 /* Build configuration list for PBXNativeTarget "ScrollWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2BD64E792E4B12700090FE59 /* Debug */,
+				2BD64E7A2E4B12700090FE59 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2BF494A52E4926A100673CFD /* Build configuration list for PBXProject "scroll" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
