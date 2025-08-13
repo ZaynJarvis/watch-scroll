@@ -89,11 +89,11 @@ class StateManager: ObservableObject {
     
     private func startDiscovery() {
         guard !discoveryInProgress else {
-            print("🔍 [StateManager] Discovery already in progress")
+            logWarning("Discovery already in progress", category: "StateManager")
             return
         }
         
-        print("🔍 [StateManager] Starting IP discovery")
+        logDiscovery("Starting IP discovery")
         discoveryInProgress = true
         connectionError = "正在搜索 Mac 应用..."
         currentIPSource = isUsingManualIP ? "手动设置" : "自动发现"
@@ -241,7 +241,7 @@ class StateManager: ObservableObject {
 
 extension StateManager: DiscoveryServiceDelegate {
     func discoveryService(_ service: DiscoveryService, didDiscoverIP ipAddress: String, source: String) {
-        print("🔍 [StateManager] Discovery found IP: \(ipAddress), source: \(source)")
+        logSuccess("Discovery found IP: \(ipAddress), source: \(source)", category: "StateManager")
         
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
@@ -263,7 +263,7 @@ extension StateManager: DiscoveryServiceDelegate {
     }
     
     func discoveryService(_ service: DiscoveryService, didFailWithError error: String) {
-        print("❌ [StateManager] Discovery failed: \(error)")
+        logError("Discovery failed: \(error)", category: "StateManager")
         
         DispatchQueue.main.async { [weak self] in
             self?.discoveryInProgress = false
@@ -277,7 +277,7 @@ extension StateManager: DiscoveryServiceDelegate {
 
 extension StateManager: ConnectionManagerDelegate {
     func connectionManager(_ manager: ConnectionManager, didConnect to: String) {
-        print("✅ [StateManager] Connected to: \(to)")
+        logSuccess("Connected to: \(to)", category: "StateManager")
         
         DispatchQueue.main.async { [weak self] in
             self?.isConnected = true
@@ -287,7 +287,7 @@ extension StateManager: ConnectionManagerDelegate {
     }
     
     func connectionManager(_ manager: ConnectionManager, didDisconnectFrom host: String, error: String?) {
-        print("❌ [StateManager] Disconnected from: \(host), error: \(error ?? "none")")
+        logError("Disconnected from: \(host), error: \(error ?? "none")", category: "StateManager")
         
         DispatchQueue.main.async { [weak self] in
             self?.isConnected = false
@@ -302,7 +302,7 @@ extension StateManager: ConnectionManagerDelegate {
     }
     
     func connectionManager(_ manager: ConnectionManager, didFailToConnect to: String, error: String) {
-        print("❌ [StateManager] Failed to connect to: \(to), error: \(error)")
+        logError("Failed to connect to: \(to), error: \(error)", category: "StateManager")
         
         DispatchQueue.main.async { [weak self] in
             self?.isConnected = false

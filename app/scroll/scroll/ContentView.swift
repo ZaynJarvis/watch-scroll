@@ -2,8 +2,10 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var bridge: WatchConnectivityBridgeV2
+    @StateObject private var debugLog = DebugLogManager.shared
     @State private var showingIPInput = false
     @State private var inputIP = ""
+    @State private var showDebugLogs = false
     
     var body: some View {
         NavigationView {
@@ -111,6 +113,79 @@ struct ContentView: View {
                         .disabled(bridge.isMacConnected)
                     }
                 }
+                
+                // Debug Section
+                VStack(spacing: 10) {
+                    Button(action: {
+                        withAnimation {
+                            showDebugLogs.toggle()
+                        }
+                    }) {
+                        HStack {
+                            Text("调试日志")
+                                .font(.headline)
+                            Spacer()
+                            Image(systemName: showDebugLogs ? "chevron.down" : "chevron.right")
+                        }
+                        .padding()
+                        .background(Color(.systemGray6))
+                        .cornerRadius(10)
+                    }
+                    
+                    if showDebugLogs {
+                        VStack {
+                            HStack {
+                                Text("最近日志 (\(debugLog.logs.count))")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                                Spacer()
+                                Button("清除") {
+                                    debugLog.clearLogs()
+                                }
+                                .font(.caption)
+                                .foregroundColor(.blue)
+                            }
+                            
+                            ScrollView {
+                                LazyVStack(alignment: .leading, spacing: 4) {
+                                    ForEach(debugLog.logs.prefix(20)) { log in
+                                        HStack(alignment: .top, spacing: 6) {
+                                            Text(log.icon)
+                                                .font(.caption)
+                                            
+                                            VStack(alignment: .leading, spacing: 1) {
+                                                HStack {
+                                                    Text(log.formattedTime)
+                                                        .font(.system(size: 10, design: .monospaced))
+                                                        .foregroundColor(.secondary)
+                                                    Text("[\(log.category)]")
+                                                        .font(.system(size: 10, weight: .medium))
+                                                        .foregroundColor(.blue)
+                                                }
+                                                Text(log.message)
+                                                    .font(.system(size: 11))
+                                                    .fixedSize(horizontal: false, vertical: true)
+                                            }
+                                            
+                                            Spacer()
+                                        }
+                                        .padding(.vertical, 2)
+                                    }
+                                }
+                                .padding(.horizontal, 8)
+                            }
+                            .frame(height: 200)
+                            .background(Color(.systemBackground))
+                            .cornerRadius(8)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Color(.systemGray4), lineWidth: 1)
+                            )
+                        }
+                        .padding(.horizontal)
+                    }
+                }
+                .padding(.horizontal)
                 
                 Spacer()
             }
