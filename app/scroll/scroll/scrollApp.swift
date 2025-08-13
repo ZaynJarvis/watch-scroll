@@ -3,7 +3,7 @@ import Network
 
 @main
 struct scrollApp: App {
-    @StateObject private var bridge = WatchConnectivityBridge.shared
+    @StateObject private var bridge = WatchConnectivityBridgeV2.shared
     @Environment(\.scenePhase) private var scenePhase
     
     var body: some Scene {

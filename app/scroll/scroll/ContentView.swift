@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var bridge: WatchConnectivityBridge
+    @EnvironmentObject var bridge: WatchConnectivityBridgeV2
     @State private var showingIPInput = false
     @State private var inputIP = ""
     
@@ -186,5 +186,5 @@ struct ConnectionStatusRow: View {
 
 #Preview {
     ContentView()
-        .environmentObject(WatchConnectivityBridge.shared)
+        .environmentObject(WatchConnectivityBridgeV2.shared)
 }
