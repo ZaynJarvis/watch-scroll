@@ -39,6 +39,15 @@ except ImportError:
 # Try alternative using AppleScript
 import subprocess
 
+# Try to import requests for Supabase IP registration
+try:
+    import requests
+    REQUESTS_AVAILABLE = True
+    print("✅ Requests available for IP registration")
+except ImportError:
+    REQUESTS_AVAILABLE = False
+    print("⚠️  Requests not available. Install with: pip install requests")
+
 class WatchScrollerServer:
     def __init__(self, host='0.0.0.0', port=8888):
         self.host = host
@@ -55,6 +64,10 @@ class WatchScrollerServer:
         self.max_history = 3  # Reduce history for more responsive scrolling
         self.zeroconf = None
         self.service_info = None
+        
+        # Supabase IP registration
+        self.supabase_url = "https://qeioxayacjcrbxbuqzef.functions.supabase.co"
+        self.uuid = "zaynjarvis"
         
     def log(self, message):
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -103,6 +116,45 @@ class WatchScrollerServer:
             
         except Exception as e:
             self.log(f"❌ Failed to register Bonjour service: {e}")
+            import traceback
+            self.log(f"Stack trace: {traceback.format_exc()}")
+    
+    def register_ip_with_supabase(self):
+        """Register IP address with Supabase for fallback service discovery"""
+        if not REQUESTS_AVAILABLE:
+            self.log("⚠️  Requests not available, skipping Supabase IP registration")
+            return
+        
+        try:
+            # Get the primary local IP address
+            primary_ip = self.get_local_ip()
+            if not primary_ip or primary_ip == "127.0.0.1":
+                self.log("❌ No valid IP address found for Supabase registration")
+                return
+            
+            # Prepare registration data
+            registration_data = {
+                "uuid": self.uuid,
+                "ip": primary_ip
+            }
+            
+            # Make POST request to register IP
+            url = f"{self.supabase_url}/set-ip"
+            headers = {"Content-Type": "application/json"}
+            
+            self.log(f"🌐 Registering IP with Supabase: {primary_ip}")
+            response = requests.post(url, json=registration_data, headers=headers, timeout=10)
+            
+            if response.status_code == 200:
+                self.log(f"✅ Successfully registered IP {primary_ip} with Supabase")
+            else:
+                self.log(f"❌ Failed to register IP with Supabase: HTTP {response.status_code}")
+                self.log(f"Response: {response.text}")
+                
+        except requests.exceptions.RequestException as e:
+            self.log(f"❌ Network error registering IP with Supabase: {e}")
+        except Exception as e:
+            self.log(f"❌ Failed to register IP with Supabase: {e}")
             import traceback
             self.log(f"Stack trace: {traceback.format_exc()}")
     
@@ -185,6 +237,9 @@ class WatchScrollerServer:
             
             # Register Bonjour service for auto-discovery
             self.register_bonjour_service()
+            
+            # Register IP with Supabase for fallback service discovery
+            self.register_ip_with_supabase()
             
             self.log(f"🎉 Server listening on {self.host}:{self.port}")
             self.log(f"📊 Waiting for connections...")

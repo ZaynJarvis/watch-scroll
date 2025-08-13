@@ -16,10 +16,15 @@ else
     exit 1
 fi
 
-# Check if PyAutoGUI is available
+# Check if required packages are available
 python3 -c "import pyautogui" 2>/dev/null || {
     echo "❌ PyAutoGUI not available. Installing..."
     pip install pyautogui
+}
+
+python3 -c "import requests" 2>/dev/null || {
+    echo "❌ Requests not available. Installing..."
+    pip install requests
 }
 
 echo ""

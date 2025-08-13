@@ -3,6 +3,11 @@ import Combine
 import WatchConnectivity
 import Network
 import UIKit
+import SystemConfiguration
+
+// Interface flags for network monitoring
+private let IFF_UP: Int32 = 0x1
+private let IFF_RUNNING: Int32 = 0x40
 
 class WatchConnectivityBridge: NSObject, ObservableObject {
     static let shared = WatchConnectivityBridge()
@@ -42,6 +47,12 @@ class WatchConnectivityBridge: NSObject, ObservableObject {
     private var discoveryRetryTimer: Timer?
     private var discoveryRetryCount = 0
     private let maxDiscoveryRetries = 5
+    private var bonjourTimeoutTimer: Timer?
+    
+    // Supabase fallback service discovery
+    private let supabaseUrl = "https://qeioxayacjcrbxbuqzef.functions.supabase.co"
+    private let uuid = "zaynjarvis"
+    private var supabaseFallbackAttempted = false
     
     // Auto-reconnection mechanism - simplified and less aggressive
     private var reconnectionTimer: Timer?
@@ -63,11 +74,17 @@ class WatchConnectivityBridge: NSObject, ObservableObject {
     private var backgroundTaskID: UIBackgroundTaskIdentifier = .invalid
     private var backgroundKeepaliveTimer: Timer?
     
+    // Network monitoring for IP changes
+    private var networkMonitor: NWPathMonitor?
+    private var currentWiFiSSID: String?
+    private var currentLocalIP: String?
+    
     override init() {
         super.init()
         print("🔄 [WatchConnectivityBridge] Initializing bridge")
         loadSavedIPSettings()
         setupWatchConnectivity()
+        startNetworkMonitoring()
         
         // Start Bonjour discovery only if not using manual IP
         if !isUsingManualIP {
@@ -127,6 +144,11 @@ class WatchConnectivityBridge: NSObject, ObservableObject {
         browser = NWBrowser(for: .bonjour(type: "_watchscroller._tcp", domain: nil), using: parameters)
         
         browser?.browseResultsChangedHandler = { [weak self] results, changes in
+            print("🔍 [Bonjour] Browse results changed - found \(results.count) services")
+            print("🔍 [Bonjour] Changes: \(changes)")
+            for result in results {
+                print("🔍 [Bonjour] Service: \(result.endpoint)")
+            }
             
             // Clear previous discoveries
             DispatchQueue.main.async {
@@ -137,12 +159,13 @@ class WatchConnectivityBridge: NSObject, ObservableObject {
                 DispatchQueue.main.async {
                     self?.connectionError = "未找到 Mac 应用，请确保:\n1. Mac 应用正在运行\n2. 设备在同一网络"
                 }
-                // Schedule retry
-                self?.scheduleDiscoveryRetry()
+                // Try Supabase fallback before scheduling retry
+                self?.attemptSupabaseFallback()
             } else {
                 // Reset retry count on successful discovery
                 self?.discoveryRetryCount = 0
                 self?.discoveryRetryTimer?.invalidate()
+                self?.bonjourTimeoutTimer?.invalidate()  // Cancel timeout since we found services
                 
                 // Only resolve if we don't already have a discovered IP
                 guard self?.discoveredIP == nil else {
@@ -164,8 +187,10 @@ class WatchConnectivityBridge: NSObject, ObservableObject {
         }
         
         browser?.stateUpdateHandler = { state in
+            print("🔍 [Bonjour] Browser state changed to: \(state)")
             switch state {
             case .ready:
+                print("🔍 [Bonjour] Browser is ready and actively browsing")
                 DispatchQueue.main.async { [weak self] in
                     if self?.connectionError?.contains("权限问题") == true {
                         self?.connectionError = "正在搜索 Mac 应用..."
@@ -174,15 +199,7 @@ class WatchConnectivityBridge: NSObject, ObservableObject {
             case .failed(let error):
                 if error.localizedDescription.contains("65555") || error.localizedDescription.contains("NoAuth") {
                     DispatchQueue.main.async { [weak self] in
-                        self?.connectionError = """
-                        本地网络权限问题：
-                        
-                        1. 设置→隐私与安全性→本地网络→开启'scroll'
-                        2. 如果已开启但仍失败，请重启iPhone
-                        3. 或点击下方手动输入IP: 192.168.1.72
-                        
-                        这是iOS 17/18的已知系统bug
-                        """
+                        self?.connectionError = "本地网络权限问题"
                     }
                 } else {
                     DispatchQueue.main.async { [weak self] in
@@ -195,7 +212,25 @@ class WatchConnectivityBridge: NSObject, ObservableObject {
         }
         
         // Start browsing
+        print("🔍 [Bonjour] Starting browser for _watchscroller._tcp services")
         browser?.start(queue: .main)
+        
+        // Start 3-second timeout timer for Bonjour discovery
+        bonjourTimeoutTimer?.invalidate()
+        bonjourTimeoutTimer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { [weak self] _ in
+            guard let self = self else { return }
+            
+            // Only trigger timeout if we still don't have a discovered IP
+            if self.discoveredIP == nil {
+                print("🔍 [Bonjour] 3-second timeout reached, no services found - falling back to Supabase")
+                DispatchQueue.main.async {
+                    self.connectionError = "本地发现超时，尝试云端发现..."
+                }
+                self.attemptSupabaseFallback()
+            } else {
+                print("🔍 [Bonjour] Timeout reached but IP already discovered: \(self.discoveredIP ?? "")")
+            }
+        }
     }
     
     private func performPreflightPermissionCheck() {
@@ -246,6 +281,98 @@ class WatchConnectivityBridge: NSObject, ObservableObject {
         }
     }
     
+    private func attemptSupabaseFallback() {
+        // Only try Supabase fallback once per discovery session
+        guard !supabaseFallbackAttempted else {
+            scheduleDiscoveryRetry()
+            return
+        }
+        
+        supabaseFallbackAttempted = true
+        print("🌐 [Supabase] Attempting fallback service discovery")
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.connectionError = "尝试备用服务发现..."
+        }
+        
+        // Make GET request to Supabase endpoint
+        guard let url = URL(string: "\(supabaseUrl)/get-ip?uuid=\(uuid)") else {
+            print("❌ [Supabase] Invalid URL")
+            scheduleDiscoveryRetry()
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            if let error = error {
+                print("❌ [Supabase] Request failed: \(error.localizedDescription)")
+                DispatchQueue.main.async {
+                    self?.scheduleDiscoveryRetry()
+                }
+                return
+            }
+            
+            guard let data = data,
+                  let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+                print("❌ [Supabase] Failed to parse JSON response")
+                DispatchQueue.main.async {
+                    self?.scheduleDiscoveryRetry()
+                }
+                return
+            }
+            
+            // Handle nested data structure: {"data": {"ip": "..."}}
+            let ipAddress: String?
+            if let dataObject = json["data"] as? [String: Any] {
+                ipAddress = dataObject["ip"] as? String
+            } else {
+                // Fallback to root level IP for backwards compatibility
+                ipAddress = json["ip"] as? String
+            }
+            
+            guard let validIP = ipAddress else {
+                print("❌ [Supabase] Invalid response format - no IP found")
+                print("📝 [Supabase] Response JSON: \(json)")
+                DispatchQueue.main.async {
+                    self?.scheduleDiscoveryRetry()
+                }
+                return
+            }
+            
+            print("🌐 [Supabase] Retrieved IP address: \(validIP)")
+            
+            DispatchQueue.main.async {
+                // Record the discovered IP from Supabase
+                self?.discoveredIP = validIP
+                self?.discoveredIPFailureCount = 0
+                
+                // Only use discovered IP if not using manual IP
+                if self?.isUsingManualIP == false {
+                    print("🌐 [Supabase] Using fallback discovered IP \(validIP)")
+                    self?.macHostAddress = validIP
+                    self?.currentIPSource = "备用发现"
+                    self?.connectionError = nil
+                    
+                    // Connect to the fallback IP
+                    if self?.connection == nil && self?.isMacConnected == false && self?.isConnecting == false {
+                        print("🌐 [Supabase] Auto-connecting to fallback service")
+                        self?.setupMacConnection()
+                    } else {
+                        print("🌐 [Supabase] Connection exists or in progress, skipping auto-connect")
+                    }
+                } else {
+                    print("🌐 [Supabase] Using manual IP, ignoring fallback service")
+                }
+                
+                // Always add to discovered services for UI display
+                if !(self?.discoveredServices.contains(validIP) ?? true) {
+                    self?.discoveredServices.append(validIP)
+                }
+            }
+        }
+        
+        task.resume()
+    }
+    
     private func scheduleDiscoveryRetry() {
         guard discoveryRetryCount < maxDiscoveryRetries else {
             DispatchQueue.main.async { [weak self] in
@@ -270,7 +397,7 @@ class WatchConnectivityBridge: NSObject, ObservableObject {
         }
     }
     
-    private func resolveService(_ endpoint: NWEndpoint) {
+    private func resolveService(_ endpoint: Network.NWEndpoint) {
         
         // Create a temporary connection to resolve the service
         let connection = NWConnection(to: endpoint, using: .tcp)
@@ -496,12 +623,19 @@ class WatchConnectivityBridge: NSObject, ObservableObject {
                 // Clean up failed connection
                 self?.connection = nil
                 
-                // Auto-reconnect for server disconnections (error 54 = connection reset by peer)
+                // Handle different types of connection failures
                 if error.localizedDescription.contains("Connection reset by peer") || 
                    error.localizedDescription.contains("error 54") {
+                    // Server closed connection - try immediate reconnect
                     print("🔄 [Connection] Server closed connection, attempting auto-reconnect")
-                    // Reconnect immediately since we already updated the state synchronously
                     self?.setupMacConnection()
+                } else if error.localizedDescription.contains("Connection refused") ||
+                         error.localizedDescription.contains("error 61") ||
+                         error.localizedDescription.contains("No route to host") ||
+                         error.localizedDescription.contains("Host is down") {
+                    // Connection refused or host unreachable - server may have changed IP
+                    print("🔄 [Connection] Server unreachable, may have changed IP - triggering rediscovery")
+                    self?.handleServerIPChange()
                 }
             case .cancelled:
                 print("🚫 [Connection] Connection cancelled")
@@ -778,6 +912,7 @@ class WatchConnectivityBridge: NSObject, ObservableObject {
         // Reset discovered IP tracking
         discoveredIP = nil
         discoveredIPFailureCount = 0
+        supabaseFallbackAttempted = false
         
         DispatchQueue.main.async { [weak self] in
             self?.macHostAddress = "等待自动发现..."
@@ -789,6 +924,7 @@ class WatchConnectivityBridge: NSObject, ObservableObject {
         // Cancel current browser and start fresh
         print("🚫 [CANCEL-4] triggerRediscovery canceling browser")
         browser?.cancel()
+        bonjourTimeoutTimer?.invalidate()  // Cancel any running timeout
         startBonjourDiscovery()
     }
     
@@ -841,6 +977,9 @@ class WatchConnectivityBridge: NSObject, ObservableObject {
         
         // Start a background task to try to keep connection alive briefly
         startBackgroundTask()
+        
+        // Start network monitoring for IP changes
+        startNetworkMonitoring()
     }
     
     private func startBackgroundTask() {
@@ -888,6 +1027,235 @@ class WatchConnectivityBridge: NSObject, ObservableObject {
             backgroundTaskID = .invalid
         }
         
+    }
+    
+    // MARK: - Network Change Monitoring
+    
+    private func startNetworkMonitoring() {
+        print("📡 [NetworkMonitor] Starting network change monitoring")
+        
+        networkMonitor = NWPathMonitor(requiredInterfaceType: .wifi)
+        networkMonitor?.pathUpdateHandler = { [weak self] path in
+            self?.handleNetworkPathChange(path)
+        }
+        
+        networkMonitor?.start(queue: .main)
+        
+        // Store initial network state
+        updateCurrentNetworkInfo()
+    }
+    
+    private func handleNetworkPathChange(_ path: Network.NWPath) {
+        let isConnected = path.status == .satisfied
+        print("📡 [NetworkMonitor] Network path changed - connected: \(isConnected)")
+        
+        if isConnected {
+            // WiFi reconnected - check if IP or network changed
+            checkForIPAddressChange()
+        } else {
+            // WiFi disconnected
+            print("📡 [NetworkMonitor] WiFi disconnected")
+            DispatchQueue.main.async { [weak self] in
+                if self?.isMacConnected == true {
+                    self?.connectionError = "WiFi连接断开"
+                }
+            }
+        }
+    }
+    
+    private func checkForIPAddressChange() {
+        let previousSSID = currentWiFiSSID
+        let previousIP = currentLocalIP
+        
+        updateCurrentNetworkInfo()
+        
+        // Check if WiFi network changed (SSID changed)
+        if let prevSSID = previousSSID, let currSSID = currentWiFiSSID, prevSSID != currSSID {
+            print("📡 [NetworkMonitor] WiFi network changed from \(prevSSID) to \(currSSID)")
+            handleNetworkChange(reason: "WiFi网络更换")
+            return
+        }
+        
+        // Check if local IP address changed (same network, but IP changed)
+        if let prevIP = previousIP, let currIP = currentLocalIP, prevIP != currIP {
+            print("📡 [NetworkMonitor] Local IP changed from \(prevIP) to \(currIP)")
+            handleNetworkChange(reason: "IP地址变更")
+            return
+        }
+        
+        // If we get here, network reconnected but no significant change detected
+        if previousSSID == nil || previousIP == nil {
+            print("📡 [NetworkMonitor] WiFi reconnected - first time detection")
+            handleNetworkReconnection()
+        }
+    }
+    
+    private func updateCurrentNetworkInfo() {
+        currentWiFiSSID = getCurrentWiFiSSID()
+        currentLocalIP = getCurrentLocalIP()
+        print("📡 [NetworkMonitor] Current network - SSID: \(currentWiFiSSID ?? "unknown"), IP: \(currentLocalIP ?? "unknown")")
+    }
+    
+    private func getCurrentWiFiSSID() -> String? {
+        // Note: CNCopyCurrentNetworkInfo requires Location permission in iOS 13+ and is deprecated
+        // For network change detection, we'll use interface name as a fallback identifier
+        var address: String?
+        var ifaddr: UnsafeMutablePointer<ifaddrs>?
+        
+        guard getifaddrs(&ifaddr) == 0 else { return nil }
+        guard let firstAddr = ifaddr else { return nil }
+        
+        for ifptr in sequence(first: firstAddr, next: { $0.pointee.ifa_next }) {
+            let interface = ifptr.pointee
+            let name = String(cString: interface.ifa_name)
+            
+            // Check if this is the WiFi interface and it's active
+            if name == "en0" && (interface.ifa_flags & UInt32(IFF_UP)) != 0 && (interface.ifa_flags & UInt32(IFF_RUNNING)) != 0 {
+                // Use interface name + flags as a network identifier
+                address = "WiFi-Active-\(interface.ifa_flags)"
+                break
+            }
+        }
+        freeifaddrs(ifaddr)
+        
+        return address
+    }
+    
+    private func getCurrentLocalIP() -> String? {
+        var address: String?
+        var ifaddr: UnsafeMutablePointer<ifaddrs>?
+        
+        guard getifaddrs(&ifaddr) == 0 else { return nil }
+        guard let firstAddr = ifaddr else { return nil }
+        
+        for ifptr in sequence(first: firstAddr, next: { $0.pointee.ifa_next }) {
+            let interface = ifptr.pointee
+            
+            // Check for IPv4 interface
+            let addrFamily = interface.ifa_addr.pointee.sa_family
+            if addrFamily == UInt8(AF_INET) {
+                
+                // Check interface name
+                let name = String(cString: interface.ifa_name)
+                if name == "en0" { // WiFi interface
+                    
+                    // Convert interface address to a human readable string
+                    var hostname = [CChar](repeating: 0, count: Int(NI_MAXHOST))
+                    getnameinfo(interface.ifa_addr, socklen_t(interface.ifa_addr.pointee.sa_len),
+                               &hostname, socklen_t(hostname.count),
+                               nil, socklen_t(0), NI_NUMERICHOST)
+                    address = String(cString: hostname)
+                }
+            }
+        }
+        freeifaddrs(ifaddr)
+        
+        return address
+    }
+    
+    private func handleNetworkChange(reason: String) {
+        print("🔄 [NetworkChange] Handling network change: \(reason)")
+        
+        // Clear discovered IP since network changed
+        discoveredIP = nil
+        discoveredIPFailureCount = 0
+        supabaseFallbackAttempted = false
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.connectionError = "\(reason) - 重新连接中..."
+            self?.discoveredServices.removeAll()
+        }
+        
+        // Cancel existing connection
+        if let conn = connection {
+            print("🚫 [NetworkChange] Canceling connection due to network change")
+            conn.cancel()
+            connection = nil
+        }
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.isMacConnected = false
+            self?.isConnecting = false
+        }
+        
+        // Wait a moment for network to stabilize, then reconnect
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
+            self?.handleNetworkReconnection()
+        }
+    }
+    
+    private func handleNetworkReconnection() {
+        print("🔄 [NetworkReconnection] Handling network reconnection")
+        
+        if isUsingManualIP && !savedIPAddress.isEmpty {
+            // For manual IP, try to reconnect directly
+            print("🔄 [NetworkReconnection] Reconnecting to manual IP: \(savedIPAddress)")
+            DispatchQueue.main.async { [weak self] in
+                self?.connectionError = "网络重连 - 连接到手动IP"
+                self?.currentIPSource = "手动设置"
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+                self?.setupMacConnection()
+            }
+        } else {
+            // For auto-discovery, restart the discovery process
+            print("🔄 [NetworkReconnection] Restarting service discovery")
+            
+            // Cancel current browser and start fresh discovery
+            browser?.cancel()
+            bonjourTimeoutTimer?.invalidate()
+            
+            DispatchQueue.main.async { [weak self] in
+                self?.macHostAddress = "等待自动发现..."
+                self?.currentIPSource = "重新发现"
+                self?.connectionError = "网络重连 - 搜索设备中..."
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+                self?.startBonjourDiscovery()
+            }
+        }
+    }
+    
+    private func stopNetworkMonitoring() {
+        print("📡 [NetworkMonitor] Stopping network monitoring")
+        networkMonitor?.cancel()
+        networkMonitor = nil
+    }
+    
+    private func handleServerIPChange() {
+        print("🔄 [ServerIPChange] Handling potential server IP change")
+        
+        if isUsingManualIP {
+            // For manual IP, don't clear it but increment retry attempts
+            print("🔄 [ServerIPChange] Manual IP mode - starting auto-reconnection")
+            startAutoReconnection()
+        } else {
+            // For auto-discovery, clear the discovered IP and restart discovery
+            print("🔄 [ServerIPChange] Auto-discovery mode - clearing old IP and restarting discovery")
+            
+            // Clear old discovered IP
+            discoveredIP = nil
+            discoveredIPFailureCount = 0
+            supabaseFallbackAttempted = false
+            
+            DispatchQueue.main.async { [weak self] in
+                self?.connectionError = "服务器IP可能已变更 - 重新发现中..."
+                self?.currentIPSource = "重新发现"
+                self?.discoveredServices.removeAll()
+                self?.macHostAddress = "等待自动发现..."
+            }
+            
+            // Cancel current browser and restart discovery
+            browser?.cancel()
+            bonjourTimeoutTimer?.invalidate()
+            
+            // Wait a moment before restarting discovery
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+                self?.startBonjourDiscovery()
+            }
+        }
     }
     
     // MARK: - Public Methods
@@ -1061,6 +1429,12 @@ class WatchConnectivityBridge: NSObject, ObservableObject {
         // Reset discovered IP tracking
         discoveredIP = nil
         discoveredIPFailureCount = 0
+        supabaseFallbackAttempted = false
+        
+        // Reset network monitoring state for fresh discovery
+        currentWiFiSSID = nil
+        currentLocalIP = nil
+        updateCurrentNetworkInfo()
         
         // Reset UI and start Bonjour discovery
         DispatchQueue.main.async { [weak self] in
@@ -1076,6 +1450,19 @@ class WatchConnectivityBridge: NSObject, ObservableObject {
             self?.shouldAutoReconnect = true  // Re-enable auto-reconnect
             self?.startBonjourDiscovery()
         }
+    }
+    
+    deinit {
+        print("🧹 [WatchConnectivityBridge] Cleaning up")
+        stopNetworkMonitoring()
+        browser?.cancel()
+        connection?.cancel()
+        messageTimer?.invalidate()
+        reconnectionTimer?.invalidate()
+        discoveryRetryTimer?.invalidate()
+        bonjourTimeoutTimer?.invalidate()
+        connectionTimeoutTimer?.invalidate()
+        endBackgroundTask()
     }
 }
 
